@@ -1,0 +1,47 @@
+body {
+    background-color: rgb(250, 250, 250);
+    color: rgb(10, 184, 190);
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    padding: 0;
+}
+
+h2 {
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.item {
+    background-color: rgb(252, 205, 104);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+}
+
+.item.purchased {
+    background-color: rgb(0, 245, 192);
+    text-decoration: line-through;
+}
+
+.App {
+    width: 100%;
+}
+
+.header {
+    border-bottom: 2px solid lightgrey;
+   
+}
+
+input {
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+button {
+    margin: 10px;
+}

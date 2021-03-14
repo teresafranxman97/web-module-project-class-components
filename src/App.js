@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
+import '../src/Todo.css';
 
 const data = [
   {
@@ -22,25 +23,74 @@ class App extends React.Component {
   constructor() {
     super()
       this.state = {
-        todos: data
+        todos: data,
+        todoItem: ''
       }
   }
 
+/// EVENT HANDLERS BEGIN ///
   handleChanges = e => {
-    this.setState({ todos: e.tarrget.value })
+    this.setState({ todoItem: e.target.value })
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("button has been clicked!")
+    this.addTodo(this.state.todoItem);
   }
+/////////////
+
+  addTodo = (todoItem) => {
+    this.setState({
+      todos: 
+      [
+        ...this.state.todos,
+        {
+          task: todoItem,
+          id: Date.now(),
+          completed: false
+        }
+      ]
+    })
+  }
+
+  toggleCompleted = (itemId) => {
+    this.setState({
+      todos: this.state.todos.map(item => {
+        if (item.id === itemId) {
+          return {
+            ...item,
+            completed: !item.completed
+          }
+        }
+        return item;
+      })
+    })
+  }
+
+ clearTodo = () => {
+   this.setState({
+     todos: this.state.todos.filter(item => {
+       return !item.completed
+     })
+   })
+ }
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoForm handleChanges={} />
-        <TodoList todos={this.todos} />
+      <div className="App">
+        <div className="header">
+          <h2>Welcome to your Todo App!</h2>
+          <TodoForm  
+            handleSubmit={this.handleSubmit} 
+            handleChanges={this.handleChanges} 
+            clearTodo={this.clearTodo}
+            addTodo={this.addTodo} 
+          />
+        </div>
+          <TodoList 
+            todos={this.state.todos} 
+            toggleCompleted={this.toggleCompleted} 
+          />
       </div>
     );
   }

@@ -1,24 +1,21 @@
 import React from 'react';
 
 class TodoForm extends React.Component {
-    constructor() {
-        super();
-            this.state = {
-               todoItem: ''             
-            }
-    }
 
     render(){
         return (
-            <form>
+            <form onSubmit={this.props.handleSubmit}>
                 <input 
-                    onChange={this.handleChanges}
+                    onChange={this.props.handleChanges}
+                    value={this.props.todoItem}
                     type="text"
-                    value={this.state.todoItem}
                     name="text"
+                    placeholder="...todo"
                 />
                 <button>Add Todo</button>
-                <button>Clear completed</button>
+                <button onClick={this.props.clearTodo}>
+                    Clear completed
+                </button>
             </form>
         )
     }
